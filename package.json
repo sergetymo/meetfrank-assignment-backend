@@ -1,0 +1,21 @@
+{
+  "name": "stats-api",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "ava -v"
+  },
+  "repository": "git@gitlab.com:atelier/stats-api.git",
+  "author": "Serge Tymoshenko <sergiy.tymoshenko@icloud.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
+  }
+}
