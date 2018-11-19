@@ -19,9 +19,15 @@ module.exports = {
    */
   ranges: ['day', 'week', 'month'],
 
+  /**
+   * Should add 'That day till today' range to StatSet
+   * @type {boolean}
+   */
+  isTillTodayAllowed: true,
+
   dates: {
     floor: '2017-11-04',
     ceil: '2017-12-15',
-    now: '2017-12-15',
+    today: '2017-12-15',
   }
 }

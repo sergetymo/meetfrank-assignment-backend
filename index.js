@@ -19,6 +19,9 @@ MongoClient
   .then(client => {
     dbClient = client
     app.locals.db = client.db('test')
+    app.locals.cache = {
+      stats: {}
+    }
     app.listen(port, () => console.info(`Listening on ${port}`))
   })
   .catch(error => console.error(error))
