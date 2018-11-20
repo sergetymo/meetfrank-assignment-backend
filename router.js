@@ -16,13 +16,25 @@ router.get('/stats', async (req, res) => {
   let date = config.dates.today
   // TODO: move from query to param
   if (Object.keys(req.query).length && req.query.date) date = req.query.date
-  const statSet = new CachedStatSet(date, cache, db)
-  const stats = await statSet.getStats()
-  res.status(200).json({
-    result: 'OK',
-    date: date,
-    stats,
-  })
+  try {
+    const statSet = new CachedStatSet(date, cache, db)
+    const stats = await statSet.getStats()
+    res.status(200).json({
+      result: 'OK',
+      data: {
+        date: date,
+        stats,
+      },
+      message: ''
+    })
+  } catch (e) {
+    res.status(500).json({
+      error: {
+        code: 500,
+        message: e.message
+      }
+    })
+  }
 })
 
 module.exports = router
