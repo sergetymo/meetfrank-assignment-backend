@@ -16,7 +16,7 @@ var end = nov11;
 //
 
 print('--');
-print('Users who mage at least ' + minPurchasesToBeActive +
+print('Users who made at least ' + minPurchasesToBeActive +
   ' purchases in period from ' +
   start.getTimestamp() + ' to ' + end.getTimestamp()
 );

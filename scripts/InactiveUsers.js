@@ -1,9 +1,8 @@
 /**
- * Finding amount of churned users for selected date
- * User is considered churned when his last purchase
- * at the time of SELECTED_DATE is exactly between
- * SELECTED_DATE - CHURN_DELAY - CHURN_DURATION and
- * SELECTED_DATE - CHURN_DELAY
+ * Finding amount of inactive users for selected date
+ * User is considered inactive when his last purchase
+ * at the time of SELECTED_DATE is before
+ * SELECTED_DATE - CHURN_DELAY - CHURN_DURATION
  */
 
 load('scripts/variables.js')
@@ -11,16 +10,12 @@ load('scripts/variables.js')
 // SELECTED_DATE - CHURN_DELAY - CHURN_DURATION
 var start = nov11;
 
-// SELECTED_DATE - CHURN_DELAY
-var mid = nov18;
-
 // SELECTED_DATE
 var end = nov25;
 
 print('--');
 print('Users whose last purchase at the time of ' +
-  end.getTimestamp() + ' was made in period from ' +
-  start.getTimestamp() + ' to ' + mid.getTimestamp()
+  end.getTimestamp() + ' was made before ' + start.getTimestamp()
 );
 
 db.purchases.aggregate([
@@ -28,8 +23,6 @@ db.purchases.aggregate([
   {
     $match: {
       _id: {
-        $gt: start
-        ,
         $lt: end
       }
     }
@@ -52,7 +45,7 @@ db.purchases.aggregate([
   ,
   {
     $match: {
-      last_purchase: { $lt: mid }
+      last_purchase: { $lt: start }
     }
   }
 
