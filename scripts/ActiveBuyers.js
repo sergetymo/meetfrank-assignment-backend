@@ -38,8 +38,8 @@ db.purchases.aggregate([
   {
     $group: {
       _id: "$user"
-      ,
-      purchase_times: { $addToSet: "$_id" }
+      // ,
+      // purchase_times: { $addToSet: "$_id" }
       ,
       count: { $sum: 1 }
     }
