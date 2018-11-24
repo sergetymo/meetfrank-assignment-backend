@@ -29,5 +29,12 @@ module.exports = {
     floor: '2017-11-04',
     ceil: '2017-12-15',
     today: '2017-12-15',
+  },
+
+  activitySettings: {
+    activeDuration: '1 week',
+    activePurchases: 7,
+    churnDelay: '10 days',
+    churnDuration: '1 day',
   }
 }

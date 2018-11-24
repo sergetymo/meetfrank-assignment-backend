@@ -20,7 +20,8 @@ MongoClient
     dbClient = client
     app.locals.db = client.db('test')
     app.locals.cache = {
-      stats: {}
+      stats: {},
+      activities: {},
     }
     app.listen(port, () => console.info(`Listening on ${port}`))
   })
