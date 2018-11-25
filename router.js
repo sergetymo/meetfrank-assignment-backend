@@ -13,8 +13,9 @@ router.get('/stats', async (req, res) => {
   const cache = req.app.locals.cache
   const db = req.app.locals.db
   let date = config.dates.today
-  // TODO: move from query to param
+
   if (Object.keys(req.query).length && req.query.date) date = req.query.date
+
   try {
     const statSet = new CachedStatSet(date, cache.stats, db)
     const activitySet = new CachedActivitySet(date, cache.activities, db)
@@ -23,7 +24,12 @@ router.get('/stats', async (req, res) => {
     res.status(200).json({
       result: 'OK',
       data: {
-        date,
+        dates: {
+          min: config.dates.floor,
+          max: config.dates.ceil,
+          today: config.dates.today,
+          current: date,
+        },
         stats,
         activities,
       },
