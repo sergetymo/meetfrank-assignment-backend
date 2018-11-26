@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const MongoDate = require('./lib/MongoDate')
 const CachedStatSet = require('./lib/CachedStatSet')
 const CachedActivitySet = require('./lib/CachedActivitySet')
 const config = require('./config')
@@ -14,7 +15,16 @@ router.get('/stats', async (req, res) => {
   const db = req.app.locals.db
   let date = config.dates.today
 
-  if (Object.keys(req.query).length && req.query.date) date = req.query.date
+  if (Object.keys(req.query).length && req.query.date) {
+    const mDate = new MongoDate(req.query.date)
+    if (mDate.isBefore(new MongoDate(config.dates.floor))) {
+      date = config.dates.floor
+    }
+    if (mDate.isAfter(new MongoDate(config.dates.ceil))) {
+      date = config.dates.ceil
+    }
+  }
+
 
   try {
     const statSet = new CachedStatSet(date, cache.stats, db)
