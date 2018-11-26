@@ -1,12 +1,82 @@
-# stats-api
+# Stats Dashboard and API
+Configurable insights about users and purchases.
 
-## Run tests
-```
-yarn test
+## Insights
+Dashboard provides information about users activity and purchases
+based on the date selected by user and configuration options in [config](/config.js). Please find queries explanation in [scripts directory](/scripts/).
+
+![timeline](scripts/timeline.jpg)
+
+### Users activity
+Depending on user behaviour and configuration options, dashboard highlights three types of users: active, churned and inactive.
+
+#### Active
+User is considered active when he made `X` purchases during last `Y` days/weeks/months.
+```javascript
+X = config.minPurchasesToBeActive
+Y = config.activePeriod
 ```
 
-## Start server
-```
-yarn run
+#### Churned
+User is considered churned on a day when his _last purchase_ was between `X` and `Y`.
+```javascript
+X = SELECTED_DAY - config.churnDelay
+Y = SELECTED_DAY - config.churnDelay -config.churnPeriod
 ```
 
+### Inactive
+User is considered inactive when his _last purchase_ was earlier than churning start point `X`.
+```javascript
+X = SELECTED_DATE - config.churnDelay - config.churnPeriod
+```
+
+### Purchases statistics
+Dashboard displays number of users who made purchases on selected day, on that’s day week and month, and in period from that day till today.
+
+## Tools and technologies
+### Backend
+- Node.js and Express
+- MongoDB Native Node.js driver
+- ava.js for testing
+
+### Frontend
+- React with help of `create-react-app`
+- SCSS
+
+## Installation and running
+### Prerequisites
+```bash
+node -v
+v10.13.0
+
+mongo --version
+MongoDB shell version v3.6.3
+
+yarn -v
+1.12.3
+```
+
+### Installation
+1. First, install dependencies: `yarn`.
+2. Make sure your `mongod` is up and running.
+3. Then load database dump: `yarn install`.
+
+### Running
+1. `yarn start`
+2. Visit [http://localhost:3000](http://localhost:3000)
+
+## Development
+Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
+
+## Further improvements
+### Fix date selecting on iOS
+For simplicity now user selects desired date using `<input type="date">`. On iOS Safari, native datepicker lacks support for `min` and `max` attributes. When user picks date that is out of available data boundaries, it just reverts to first or last available date.
+
+### Improve caching mechanism
+For simplicity, all heavily calculated data is cached and stored in `app.locals`. There’re definitely better cache storage choices.
+
+### Provide trends on activity stats
+There’s possibility to provide some kind of trend information about user activity, e.g. _number of active users dropped by 4%_.
+
+### Elaborate more metrics
+Like activity rate or churn rate
