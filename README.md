@@ -45,7 +45,7 @@ Dashboard displays number of users who made purchases on selected day, on thatâ€
 - React with help of `create-react-app`
 - SCSS
 
-## Installation and running
+## Installation, running and testing
 ### Prerequisites
 ```bash
 node -v
@@ -66,6 +66,11 @@ yarn -v
 ### Running
 1. `yarn start`
 2. Visit [http://localhost:3000](http://localhost:3000)
+
+### Testing
+1. `yarn test`
+
+---
 
 ## Development
 Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
