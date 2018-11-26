@@ -1,33 +1,16 @@
-const app = require('express')()
+const express = require('express')
 const MongoClient = require('mongodb').MongoClient
-const port = process.env.PORT || 3002 
-const mongoUri = 'mongodb://localhost'
-
 const router = require('./router')
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  'http://kenneth.local:3000',
-  'http://amaranth.local:3000'
-]
+
+const port = process.env.PORT || 3000
+const mongoUri = 'mongodb://localhost'
 
 let dbClient
 
-app.use((req, res, next) => {
-  if (allowedOrigins.indexOf(req.headers.origin) > -1) {
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  next();
-});
+const app = express()
 
+app.use(express.static('public'))
 app.use('/api', router)
-
-app.get('/', (req, res) => 
-  // TODO: join two repos and serve static form here
-  res.send('Hello World')
-)
 
 MongoClient
   .connect(mongoUri, {useNewUrlParser: true})
