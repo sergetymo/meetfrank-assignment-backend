@@ -21,13 +21,13 @@ Y = config.activitySettings.activePeriod
 User is considered churned on a day when his _last purchase_ was between `X` and `Y`. See [query explanation](/scripts/ChurnedUSers.js).
 ```javascript
 X = SELECTED_DATE - config.activitySettings.churnDelay
-Y = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
+Y = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnDuration
 ```
 
 #### Inactive
 User is considered inactive when his _last purchase_ was earlier than churning start point `X`. See [query explanation](/scripts/InactiveUsers.js).
 ```javascript
-X = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
+X = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnDuration
 ```
 
 ### Purchases statistics
@@ -44,6 +44,8 @@ Dashboard displays number of users who made purchases on selected day, on thatâ€
 ### Frontend
 - React with help of `create-react-app`
 - SCSS
+
+Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
 
 ## Installation, running and testing
 ### Prerequisites
@@ -69,12 +71,6 @@ yarn -v
 
 ### Testing
 1. `yarn test`
-
----
-
-## Development
-Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
-
 
 ---
 
