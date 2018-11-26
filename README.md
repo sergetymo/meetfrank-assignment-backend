@@ -10,28 +10,30 @@ based on the date selected by user and configuration options in [config](/config
 ### Users activity
 Depending on user behaviour and configuration options, dashboard highlights three types of users: active, churned and inactive.
 
-#### Active
-User is considered active when he made `X` purchases during last `Y` days/weeks/months.
+##### Active
+User is considered active when he made `X` purchases during last `Y` days/weeks/months. See [query explanation](/scripts/ActiveBuyers.js)
 ```javascript
-X = config.minPurchasesToBeActive
-Y = config.activePeriod
+X = config.activitySettings.activePurchases
+Y = config.activitySettings.activePeriod
 ```
 
-#### Churned
-User is considered churned on a day when his _last purchase_ was between `X` and `Y`.
+##### Churned
+User is considered churned on a day when his _last purchase_ was between `X` and `Y`. See [query explanation](/scripts/ChurnedUSers.js)
 ```javascript
-X = SELECTED_DAY - config.churnDelay
-Y = SELECTED_DAY - config.churnDelay -config.churnPeriod
+X = SELECTED_DAY - config.activitySettings.churnDelay
+Y = SELECTED_DAY - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
 ```
 
-### Inactive
-User is considered inactive when his _last purchase_ was earlier than churning start point `X`.
+#### Inactive
+User is considered inactive when his _last purchase_ was earlier than churning start point `X`. See [query explanation](/scripts/InactiveUsers.js)
 ```javascript
-X = SELECTED_DATE - config.churnDelay - config.churnPeriod
+X = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
 ```
 
 ### Purchases statistics
 Dashboard displays number of users who made purchases on selected day, on that’s day week and month, and in period from that day till today.
+
+---
 
 ## Tools and technologies
 ### Backend
@@ -67,6 +69,8 @@ yarn -v
 
 ## Development
 Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
+
+---
 
 ## Further improvements
 ### Fix date selecting on iOS
