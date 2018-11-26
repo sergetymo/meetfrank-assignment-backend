@@ -11,21 +11,21 @@ based on the date selected by user and configuration options in [config](/config
 Depending on user behaviour and configuration options, dashboard highlights three types of users: active, churned and inactive.
 
 ##### Active
-User is considered active when he made `X` purchases during last `Y` days/weeks/months. See [query explanation](/scripts/ActiveBuyers.js)
+User is considered active when he made `X` purchases during last `Y` days/weeks/months. See [query explanation](/scripts/ActiveBuyers.js).
 ```javascript
 X = config.activitySettings.activePurchases
 Y = config.activitySettings.activePeriod
 ```
 
 ##### Churned
-User is considered churned on a day when his _last purchase_ was between `X` and `Y`. See [query explanation](/scripts/ChurnedUSers.js)
+User is considered churned on a day when his _last purchase_ was between `X` and `Y`. See [query explanation](/scripts/ChurnedUSers.js).
 ```javascript
-X = SELECTED_DAY - config.activitySettings.churnDelay
-Y = SELECTED_DAY - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
+X = SELECTED_DATE - config.activitySettings.churnDelay
+Y = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
 ```
 
 #### Inactive
-User is considered inactive when his _last purchase_ was earlier than churning start point `X`. See [query explanation](/scripts/InactiveUsers.js)
+User is considered inactive when his _last purchase_ was earlier than churning start point `X`. See [query explanation](/scripts/InactiveUsers.js).
 ```javascript
 X = SELECTED_DATE - config.activitySettings.churnDelay - config.activitySettings.churnPeriod
 ```
@@ -69,6 +69,12 @@ yarn -v
 
 ## Development
 Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
+
+
+---
+
+## Demo
+![Demo video](scripts/demo.mp4)
 
 ---
 
