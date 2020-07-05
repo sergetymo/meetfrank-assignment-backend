@@ -1,4 +1,4 @@
-# Stats Dashboard and API
+# Purchases API and Dashboard
 Configurable insights about users and purchases.
 
 ## Insights
@@ -45,25 +45,25 @@ Dashboard displays number of users who made purchases on selected day, on thatâ€
 - React with help of `create-react-app`
 - SCSS
 
-Frontend part is located in separate repository [stats-dashboard](https://gitlab.com/atelier/stats-dashboard).
+Frontend part is located in separate repository [meetfrank-assignment-frontend](https://github.com/sergetymo/meetfrank-assignment-frontend).
 
 ## Installation, running and testing
 ### Prerequisites
 ```bash
-node -v
+$ node -v
 v10.13.0
 
-mongo --version
+$ mongo --version
 MongoDB shell version v3.6.3
 
-yarn -v
+$ yarn -v
 1.12.3
 ```
 
 ### Installation
 1. First, install dependencies: `yarn`.
 2. Make sure your `mongod` is up and running.
-3. Then load database dump: `yarn install`.
+3. Then restore database from dump: `yarn restore`.
 
 ### Running
 1. `yarn start`
