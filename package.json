@@ -1,14 +1,14 @@
 {
-  "name": "stats-api",
-  "version": "1.0.0",
+  "name": "meetfrank-application-backend",
+  "version": "1.1.0",
   "main": "src/index.js",
   "scripts": {
     "start": "node index.js",
     "test": "ava -v",
-    "install": "mongorestore --db test --drop --nsInclude '*.*' ./data"
+    "restore": "mongorestore --db test --drop --nsInclude '*.*' ./data"
   },
-  "repository": "git@gitlab.com:atelier/stats-api.git",
-  "author": "Serge Tymoshenko <sergiy.tymoshenko@icloud.com>",
+  "repository": "git@github.com:sergetymo/meetfrank-application-backend.git",
+  "author": "Serge Tymoshenko <serge@tymo.name>",
   "license": "MIT",
   "private": false,
   "dependencies": {

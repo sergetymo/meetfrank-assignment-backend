@@ -75,7 +75,7 @@ yarn -v
 ---
 
 ## Demo
-![Demo video](scripts/demo.mp4)
+[Demo video](scripts/demo.mp4)
 
 ---
 
